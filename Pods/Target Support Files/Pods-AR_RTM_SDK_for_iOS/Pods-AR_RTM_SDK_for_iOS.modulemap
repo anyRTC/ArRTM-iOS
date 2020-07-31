@@ -1,0 +1,6 @@
+framework module Pods_AR_RTM_SDK_for_iOS {
+  umbrella header "Pods-AR_RTM_SDK_for_iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

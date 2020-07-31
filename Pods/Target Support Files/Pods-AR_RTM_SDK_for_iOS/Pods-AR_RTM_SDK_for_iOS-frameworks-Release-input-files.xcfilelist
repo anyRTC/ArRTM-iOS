@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-AR_RTM_SDK_for_iOS/Pods-AR_RTM_SDK_for_iOS-frameworks.sh
+${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework
+${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework
+${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework

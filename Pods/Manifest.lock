@@ -1,16 +1,30 @@
 PODS:
+  - Bugly (2.5.5)
+  - FMDB (2.6.2):
+    - FMDB/standard (= 2.6.2)
+  - FMDB/standard (2.6.2)
   - Masonry (1.1.0)
+  - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
+  - Bugly (~> 2.5.2)
+  - FMDB (~> 2.6.2)
   - Masonry
+  - SVProgressHUD (~> 2.2.5)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
+    - Bugly
+    - FMDB
     - Masonry
+    - SVProgressHUD
 
 SPEC CHECKSUMS:
+  Bugly: eded937bbb1f731cacf689c2d934ddbd9ab34f83
+  FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: d50e33cb56871ec64188f72a84b4e8a30de8f206
+PODFILE CHECKSUM: a14eca7ad22e1e54b2615db4ba5421bb048b2ef9
 
-COCOAPODS: 1.7.1
+COCOAPODS: 1.9.3
