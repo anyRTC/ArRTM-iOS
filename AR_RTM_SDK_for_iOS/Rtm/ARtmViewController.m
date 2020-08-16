@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *padding;
 
 @property (nonatomic, strong) NSMutableArray *dataArr;
 @property (nonatomic, strong) ARtmChannel *rtmChannel;
@@ -30,7 +31,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    if (ARBangsScreen) {
+        self.padding.constant = 86;
+    }
     [UIApplication.sharedApplication setIdleTimerDisabled:YES];
+    
     ARtmManager.rtmKit.aRtmDelegate = self;
     self.dataArr = [NSMutableArray arrayWithCapacity:10];
     self.messageTextField.layer.borderColor = RGBA_CG(182,187,196, 1);
@@ -198,6 +203,8 @@
     if (self.messageTextField.text.length != 0) {
         ARtmMessage *message = [[ARtmMessage alloc] initWithText:self.messageTextField.text];
         ARtmSendMessageOptions *options = [[ARtmSendMessageOptions alloc] init];
+        options.enableOfflineMessaging = YES;
+        options.enableHistoricalMessaging = YES;
         
         __block NSString *text= self.messageTextField.text;
         WEAKSELF;

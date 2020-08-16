@@ -26,13 +26,22 @@
 
 //MARK: - 配置开发者信息
 
-static NSString *appId = <#T##String#>;
+static NSString *appId = <#T##NSString#>;
 static NSString *token = @"";
 
 //MARK: - other
 
 #define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
 #define RGBA_CG(r, g, b, a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a].CGColor
+
+#define ARBangsScreen ({\
+    BOOL isBangsScreen = NO; \
+    if (@available(iOS 11.0, *)) { \
+    UIWindow *window = [[UIApplication sharedApplication].windows firstObject]; \
+    isBangsScreen = window.safeAreaInsets.bottom > 0; \
+    } \
+    isBangsScreen; \
+})
 
 #define WEAKSELF __weak typeof(self)weakSelf = self
 

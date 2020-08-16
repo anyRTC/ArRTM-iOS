@@ -46,25 +46,29 @@
 }
 
 - (void)didClickLogoutButton:(UIButton *)sender {
+    WEAKSELF;
     UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"确定退出登录？" message:@"退出登录历史消息将会清空" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        WEAKSELF;
-        [ARtmManager setLocalUid:@""];
-        [ARtmInfoManager removeAllObject];
-        //登出
-        [ARtmManager.rtmKit logoutWithCompletion:^(ARtmLogoutErrorCode errorCode) {
-            if (errorCode == ARtmLogoutErrorOk) {
-                if (weakSelf.index) {
-                    UIApplication.sharedApplication.keyWindow.rootViewController =[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ARtm_Login"];;
-                }
-                [weakSelf.navigationController popViewControllerAnimated:YES];
-            }
-        }];
+        [weakSelf logout];
     }];
     UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     [alertVc addAction:action];
     [alertVc addAction:cancleAction];
     [self presentViewController:alertVc animated:YES completion:nil];
+}
+
+- (void)logout {
+    [ARtmManager setLocalUid:@""];
+    [ARtmInfoManager removeAllObject];
+    //登出
+    [ARtmManager.rtmKit logoutWithCompletion:^(ARtmLogoutErrorCode errorCode) {
+        if (errorCode == ARtmLogoutErrorOk) {
+            if (self.index) {
+                UIApplication.sharedApplication.keyWindow.rootViewController =[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ARtm_Login"];
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }];
 }
 
 - (void)didClickConfigButton:(UIButton *)sender {
@@ -88,10 +92,9 @@
                     [SVProgressHUD dismissWithDelay:0.5];
                 }
             }];
-        } else {
-            [self getHistoryData];
         }
     }
+    [self getHistoryData];
 }
 
 - (IBAction)didClickChatButton:(UIButton *)sender {
@@ -186,10 +189,16 @@
 
 - (void)rtmKit:(ARtmKit * _Nonnull)kit connectionStateChanged:(ARtmConnectionState)state reason:(ARtmConnectionChangeReason)reason {
     //连接状态改变回调
+    if (reason == ARtmConnectionChangeReasonRemoteLogin) {
+        [SVProgressHUD showInfoWithStatus:@"异地登录"];
+        [SVProgressHUD dismissWithDelay:1.0];
+        [self logout];
+    }
 }
 
 - (void)rtmKit:(ARtmKit * _Nonnull)kit messageReceived:(ARtmMessage * _Nonnull)message fromPeer:(NSString * _Nonnull)peerId {
     //收到点对点消息回调
+    NSLog(@"messageReceived == %@ isOfflineMessage == %d",message.text,message.isOfflineMessage);
     //[ARtmManager addOfflineMessage:message fromUser:peerId];
     ARtmMessageModel *model = [[ARtmMessageModel alloc] init];
     model.peerId = peerId;
