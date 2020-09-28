@@ -93,9 +93,12 @@
                 }
             }];
         }
-    } else if (self.isLogin) {
+    }
+    if (self.isLogin) {
         [self getHistoryData];
     }
+    [self.tableView reloadData];
+
 }
 
 - (IBAction)didClickChatButton:(UIButton *)sender {
@@ -159,7 +162,7 @@
     ARtmMessageModel *model = self.dataArr[indexPath.row];
     model.num = 0;
     [ARtmHistoryManager updateHistoyModel:model];
-    [tableView reloadData];
+   [tableView reloadData];
     
     ARtmViewController *rtmVc = [[self storyboard] instantiateViewControllerWithIdentifier:@"ARtm_Identity"];
     rtmVc.modalPresentationStyle = UIModalPresentationFullScreen;
