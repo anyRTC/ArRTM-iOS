@@ -162,6 +162,7 @@
     ARtmMessageModel *model = [[ARtmMessageModel alloc] init];
     model.content = message.text;
     model.direction = 0;
+    model.uid = member.uid;
     [self.dataArr addObject:model];
     [self.tableView reloadData];
     [self scrollToEnd];
