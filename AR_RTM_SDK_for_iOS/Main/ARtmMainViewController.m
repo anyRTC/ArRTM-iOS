@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIView *placeholderView;
 
 @property (nonatomic, strong) NSMutableArray *dataArr;
-@property (nonatomic, assign) BOOL isLogin;
+
 
 @end
 
@@ -93,8 +93,9 @@
                 }
             }];
         }
+    } else if (self.isLogin) {
+        [self getHistoryData];
     }
-    [self getHistoryData];
 }
 
 - (IBAction)didClickChatButton:(UIButton *)sender {
@@ -158,6 +159,7 @@
     ARtmMessageModel *model = self.dataArr[indexPath.row];
     model.num = 0;
     [ARtmHistoryManager updateHistoyModel:model];
+    [tableView reloadData];
     
     ARtmViewController *rtmVc = [[self storyboard] instantiateViewControllerWithIdentifier:@"ARtm_Identity"];
     rtmVc.modalPresentationStyle = UIModalPresentationFullScreen;

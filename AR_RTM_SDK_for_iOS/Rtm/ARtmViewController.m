@@ -203,8 +203,21 @@
 - (void)sendRtmMessage {
     if (self.messageTextField.text.length != 0) {
         ARtmMessage *message = [[ARtmMessage alloc] initWithText:self.messageTextField.text];
+        NSMutableArray *peeridArr = [NSMutableArray arrayWithCapacity:1];
+        [peeridArr addObject:self.account];
         ARtmSendMessageOptions *options = [[ARtmSendMessageOptions alloc] init];
-        options.enableOfflineMessaging = YES;
+        [ARtmManager.rtmKit queryPeersOnlineStatus: peeridArr completion:^(NSArray<ARtmPeerOnlineStatus *> * _Nullable peerOnlineStatus, ARtmQueryPeersOnlineErrorCode errorCode) {
+            if (errorCode == ARtmQueryPeersOnlineErrorOk) {
+                for (ARtmPeerOnlineStatus *status in peerOnlineStatus) {
+                    if ([self.account isEqualToString:status.peerId])
+                        if (status.state == 0) {
+                            options.enableOfflineMessaging = false;
+                        } else {
+                            options.enableOfflineMessaging = YES;
+                        }
+                }
+            }
+        }];
         options.enableHistoricalMessaging = YES;
         
         __block NSString *text= self.messageTextField.text;
@@ -219,6 +232,7 @@
         } else {
             //点对点消息
             [self sendMessageResult:text];
+            
             [ARtmManager.rtmKit sendMessage:message toPeer:self.account sendMessageOptions:options completion:^(ARtmSendPeerMessageErrorCode errorCode) {
                 NSLog(@"Peer sendMessage Sucess");
             }];

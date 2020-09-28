@@ -31,6 +31,7 @@
             if (errorCode == ARtmLoginErrorOk) {
                 [ARtmManager setLocalUid:localUid];
                 ARtmMainViewController *mainVc = [[self storyboard] instantiateViewControllerWithIdentifier:@"ARtm_Main"];
+                mainVc.isLogin = YES;
                 [weakSelf.navigationController pushViewController:mainVc animated:YES];
             }
         }];

@@ -40,7 +40,8 @@ static NSDate *_date;
     BOOL open = [_historydb open];
     NSMutableArray *arr = [[NSMutableArray alloc] init];
     if (open) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM t_info WHERE peerId = %@;",peerId];
+        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM t_info WHERE peerId = '%@';",peerId];
+        NSLog(peerId);
         FMResultSet *set = [_historydb executeQuery:sql];
         if (set) {
             while (set.next) {

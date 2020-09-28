@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ARtmMainViewController : UIViewController
 
 @property (nonatomic, assign) BOOL index;
-
+@property (nonatomic, assign) BOOL isLogin;
 @end
 
 NS_ASSUME_NONNULL_END
