@@ -131,7 +131,7 @@
     model.content = message.text;
     model.uid = peerId;
     model.direction = 0;
-    model.isOfflineMessage = true;
+    model.isOfflineMessage = false;
     if ([peerId isEqualToString:self.account] && self.rtmType != ARtmTypeGroup) {
         [self.dataArr addObject:model];
         [self.tableView reloadData];
