@@ -210,7 +210,7 @@
     model.content = message.text;
     model.uid = peerId;
     model.direction = 0;
-    model.isOfflineMessage = YES;
+    model.isOfflineMessage = true;
     [ARtmInfoManager saveMessageWithInfoModel:model];
     [self getHistoryData];
 }

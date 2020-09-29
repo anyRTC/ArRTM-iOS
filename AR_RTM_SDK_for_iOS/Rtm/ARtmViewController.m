@@ -131,7 +131,8 @@
     model.content = message.text;
     model.uid = peerId;
     model.direction = 0;
-    if ([peerId isEqualToString:self.account]) {
+    model.isOfflineMessage = true;
+    if ([peerId isEqualToString:self.account] && self.rtmType != ARtmTypeGroup) {
         [self.dataArr addObject:model];
         [self.tableView reloadData];
         [self scrollToEnd];
@@ -155,6 +156,7 @@
 
 - (void)channel:(ARtmChannel * _Nonnull)channel memberLeft:(ARtmMember * _Nonnull)member {
     //频道成员离开频道回调
+    
 }
 
 - (void)channel:(ARtmChannel * _Nonnull)channel messageReceived:(ARtmMessage * _Nonnull)message fromMember:(ARtmMember * _Nonnull)member {
@@ -214,32 +216,32 @@
                             options.enableOfflineMessaging = false;
                         } else {
                             options.enableOfflineMessaging = YES;
+                            NSLog(@"offline");
                         }
+                    options.enableHistoricalMessaging = YES;
+
+                    __block NSString *text= self.messageTextField.text;
+                        WEAKSELF;
+                        if (self.rtmType == ARtmTypeGroup) {
+                            //频道消息
+                            [self.rtmChannel sendMessage:message sendMessageOptions:options completion:^(ARtmSendChannelMessageErrorCode errorCode) {
+                                [weakSelf sendMessageResult:text];
+                                NSLog(@"Channel sendMessage Sucess");
+                                
+                            }];
+                        } else {
+                            //点对点消息
+                            [self sendMessageResult:text];
+                            
+                            [ARtmManager.rtmKit sendMessage:message toPeer:self.account sendMessageOptions:options completion:^(ARtmSendPeerMessageErrorCode errorCode) {
+                                NSLog(@"Peer sendMessage Sucess");
+                            }];
+                        }
+                    self.messageTextField.text = @"";
+                    [self.messageTextField resignFirstResponder];
                 }
             }
-        }];
-        options.enableHistoricalMessaging = YES;
-        
-        __block NSString *text= self.messageTextField.text;
-        WEAKSELF;
-        if (self.rtmType == ARtmTypeGroup) {
-            //频道消息
-            [self.rtmChannel sendMessage:message sendMessageOptions:options completion:^(ARtmSendChannelMessageErrorCode errorCode) {
-                [weakSelf sendMessageResult:text];
-                NSLog(@"Channel sendMessage Sucess");
-                
-            }];
-        } else {
-            //点对点消息
-            [self sendMessageResult:text];
-            
-            [ARtmManager.rtmKit sendMessage:message toPeer:self.account sendMessageOptions:options completion:^(ARtmSendPeerMessageErrorCode errorCode) {
-                NSLog(@"Peer sendMessage Sucess");
-            }];
-        }
-        
-        self.messageTextField.text = @"";
-        [self.messageTextField resignFirstResponder];
+        }];   
     }
 }
 
