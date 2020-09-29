@@ -109,52 +109,7 @@
 - (void)didClickRefreshButton:(UIButton *)sender {
     [self getAttributes];
 }
-- (void) updateAttribute: (ARtmAttribute *)attribute {
-    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"修改属性" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alertVc addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.placeholder = @"value";
-    }];
-    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        NSString *value = [[alertVc textFields] objectAtIndex:0].text;
-        
-        if ((value.length != 0)) {
-            if (self.attributeType != ARtmAttributesTypeChannel) {
-                //个人属性
-                ARtmAttribute *newAttribute = [[ARtmAttribute alloc] init];
-                newAttribute.key = attribute.key;
-                newAttribute.value = value;
-                [ARtmManager.rtmKit addOrUpdateLocalUserAttributes:@[newAttribute] completion:^(ARtmProcessAttributeErrorCode errorCode) {
-                    if (errorCode == ARtmAttributeOperationErrorOk) {
-                        [self getAttributes];
-                        
-                    }
-                }];
-            } else {
-                //频道属性
-                ARtmChannelAttribute *channelAttribute = [[ARtmChannelAttribute alloc] init];
-                channelAttribute.key = attribute.key;
-                channelAttribute.value = value;
-                ARtmChannelAttributeOptions * options = [[ARtmChannelAttributeOptions alloc] init];
-                options.enableNotificationToChannelMembers = YES;
-                
-                [ARtmManager.rtmKit addOrUpdateChannel:self.account Attributes:@[channelAttribute] Options:options completion:^(ARtmProcessAttributeErrorCode errorCode) {
-                    if (errorCode == ARtmAttributeOperationErrorOk) {
-                        [self getAttributes];
-                        
-                    }
-                }];
-            }
-        } else {
-            [SVProgressHUD showInfoWithStatus:@" Value 不能为空"];
-            [SVProgressHUD dismissWithDelay:0.8];
-            
-        }
-    }];
-    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-     [alertVc addAction:action2];
-     [alertVc addAction:action1];
-     [self presentViewController:alertVc animated:YES completion:nil];
-}
+
 - (void)didClickAddAttributesButton:(UIButton *)sender {
     WEAKSELF;
     UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"添加属性" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -195,9 +150,6 @@
                     }
                 }];
             }
-        } else {
-            [SVProgressHUD showInfoWithStatus:@"Key 和 Value 不能为空"];
-            [SVProgressHUD dismissWithDelay:0.8];
         }
     }];
     
@@ -251,16 +203,14 @@
             ARtmChannelAttribute *channelAttribute = self.arr[indexPath.row];
             [ARtmManager.rtmKit deleteChannel:self.account AttributesByKeys:@[channelAttribute.key] Options:options completion:^(ARtmProcessAttributeErrorCode errorCode) {
                 if (errorCode == ARtmAttributeOperationErrorOk) {
-                    
-                }
+                     [weakSelf getAttributes];
+                 }
             }];
         }
     }];
     
     UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"修改" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        ARtmAttribute *attribute = self.arr[indexPath.item];
-        [weakSelf updateAttribute:attribute];
-        
+        [self didClickAddAttributesButton:nil];
     }];
     return @[action0,action1];
 }
