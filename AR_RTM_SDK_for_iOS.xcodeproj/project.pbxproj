@@ -15,12 +15,12 @@
 		631B6F642498B5DE00B16995 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 631B6F632498B5DE00B16995 /* main.m */; };
 		63245C8B24BFF21900458513 /* ARtmMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63245C8A24BFF21900458513 /* ARtmMainViewController.m */; };
 		63245C9524C002BB00458513 /* ARtmAttributesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63245C9424C002BB00458513 /* ARtmAttributesController.m */; };
-		6368635324E95DA500BDCE95 /* ARtmKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6368635124E95D9B00BDCE95 /* ARtmKit.framework */; };
-		6368635424E95DA500BDCE95 /* ARtmKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6368635124E95D9B00BDCE95 /* ARtmKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		63730F90249C5A4200CD3458 /* ARtmManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 63730F8F249C5A4200CD3458 /* ARtmManager.m */; };
 		63730F94249C622E00CD3458 /* ARtmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63730F93249C622E00CD3458 /* ARtmViewController.m */; };
 		63730F97249C72B300CD3458 /* ARtmMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63730F96249C72B300CD3458 /* ARtmMessageCell.m */; };
 		63730F9A249C72D500CD3458 /* ARtmMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 63730F99249C72D500CD3458 /* ARtmMessageModel.m */; };
+		637FA21F252478AD00307DA3 /* ARtmKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 637FA21D252478A400307DA3 /* ARtmKit.framework */; };
+		637FA220252478AD00307DA3 /* ARtmKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 637FA21D252478A400307DA3 /* ARtmKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		63CA2ED524C02117003FF0AC /* ARtmInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CA2ED424C02117003FF0AC /* ARtmInfoCell.m */; };
 		63CA2ED824C02874003FF0AC /* ARtmInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CA2ED724C02874003FF0AC /* ARtmInfoManager.m */; };
 		63CA2EE424C07E94003FF0AC /* ARtmHistoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CA2EE324C07E94003FF0AC /* ARtmHistoryManager.m */; };
@@ -34,7 +34,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6368635424E95DA500BDCE95 /* ARtmKit.framework in Embed Frameworks */,
+				637FA220252478AD00307DA3 /* ARtmKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -60,7 +60,6 @@
 		63245C8A24BFF21900458513 /* ARtmMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARtmMainViewController.m; sourceTree = "<group>"; };
 		63245C9324C002BB00458513 /* ARtmAttributesController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARtmAttributesController.h; sourceTree = "<group>"; };
 		63245C9424C002BB00458513 /* ARtmAttributesController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARtmAttributesController.m; sourceTree = "<group>"; };
-		6368635124E95D9B00BDCE95 /* ARtmKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ARtmKit.framework; sourceTree = "<group>"; };
 		63730F8E249C5A4200CD3458 /* ARtmManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARtmManager.h; sourceTree = "<group>"; };
 		63730F8F249C5A4200CD3458 /* ARtmManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARtmManager.m; sourceTree = "<group>"; };
 		63730F91249C5CAC00CD3458 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -70,6 +69,7 @@
 		63730F96249C72B300CD3458 /* ARtmMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARtmMessageCell.m; sourceTree = "<group>"; };
 		63730F98249C72D500CD3458 /* ARtmMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARtmMessageModel.h; sourceTree = "<group>"; };
 		63730F99249C72D500CD3458 /* ARtmMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARtmMessageModel.m; sourceTree = "<group>"; };
+		637FA21D252478A400307DA3 /* ARtmKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ARtmKit.framework; sourceTree = "<group>"; };
 		63CA2ED324C02117003FF0AC /* ARtmInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARtmInfoCell.h; sourceTree = "<group>"; };
 		63CA2ED424C02117003FF0AC /* ARtmInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARtmInfoCell.m; sourceTree = "<group>"; };
 		63CA2ED624C02874003FF0AC /* ARtmInfoManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARtmInfoManager.h; sourceTree = "<group>"; };
@@ -86,7 +86,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				879FD6B2719F783A7EB3D130 /* Pods_AR_RTM_SDK_for_iOS.framework in Frameworks */,
-				6368635324E95DA500BDCE95 /* ARtmKit.framework in Frameworks */,
+				637FA21F252478AD00307DA3 /* ARtmKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +114,7 @@
 		631B6F502498B5DD00B16995 /* AR_RTM_SDK_for_iOS */ = {
 			isa = PBXGroup;
 			children = (
-				6368635124E95D9B00BDCE95 /* ARtmKit.framework */,
+				637FA21D252478A400307DA3 /* ARtmKit.framework */,
 				63EDCF3F24C5CB54003AE948 /* Rtm */,
 				63EDCF3E24C5CB4F003AE948 /* Main */,
 				63EDCF3D24C5CB1E003AE948 /* Base */,
