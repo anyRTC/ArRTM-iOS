@@ -136,6 +136,8 @@
         [self.dataArr addObject:model];
         [self.tableView reloadData];
         [self scrollToEnd];
+    } else {
+        model.isOfflineMessage = true;
     }
     [ARtmInfoManager saveMessageWithInfoModel:model];
 }
